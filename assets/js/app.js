@@ -349,21 +349,14 @@
     var box = el("div", "toolkit");
 
     var head = el("div", "toolkit-head");
-    var title = el("span", "toolkit-title", cfg.title.hu);
-    title.setAttribute("lang", "hu");
-    head.appendChild(title);
-
-    var titleEn = el("span", "en", cfg.title.en);
-    titleEn.setAttribute("lang", "en");
-    head.appendChild(titleEn);
-
     var toggle = el("button", "btn btn-sm", "");
     toggle.type = "button";
-    /* 按钮同时显示三层语言：7 törzs / Seven Tribes / 七个部落 */
-    toggle.textContent = cfg.button.hu + " · " + cfg.button.en + " · " + cfg.button.zh;
+    /* 按钮同时显示三层语言：7 törzs · Seven Tribes · 七个部落 */
+    var kitLabel = cfg.button.hu + " · " + cfg.button.en + " · " + cfg.button.zh;
     toggle.setAttribute("lang", "hu");
     toggle.setAttribute("aria-expanded", "false");
     toggle.classList.add("toolkit-open-btn");
+    toggle.textContent = "▸ " + kitLabel;
     head.appendChild(toggle);
     box.appendChild(head);
 
@@ -423,6 +416,7 @@
     toggle.addEventListener("click", function () {
       var open = body.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.textContent = (open ? "▾ " : "▸ ") + kitLabel;
     });
 
     box.appendChild(body);
